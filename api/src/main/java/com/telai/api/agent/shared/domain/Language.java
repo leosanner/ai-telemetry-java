@@ -1,14 +1,12 @@
 package com.telai.api.agent.shared.domain;
 
-import java.util.Arrays;
-
 public enum Language {
 
     PORTUGUESE("portuguese", "pt-br"),
     ENGLISH("english", "en");
 
-    private String language;
-    private String abbreviation;
+    private final String language;
+    private final String abbreviation;
 
     Language(String language, String abbreviation) {
         this.language = language;

@@ -13,7 +13,7 @@ public interface ChatUseCase {
         Language: {{language}}
     """)
     Result<AgentResponse> execute(
-            @V("question") String question,
+            @V("prompt") String prompt,
             @V("language") String language
     );
 }
