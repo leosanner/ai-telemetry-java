@@ -2,6 +2,7 @@ package com.telai.api.agent.chat.http;
 
 import com.telai.api.agent.chat.ChatUseCase;
 import com.telai.api.agent.chat.ChatInputDTO;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +19,7 @@ public class ChatController {
 
     @GetMapping("/")
     public ResponseEntity<ChatResponse> chat(
-            @RequestBody ChatRequest chatRequest) {
+            @RequestBody @Valid ChatRequest chatRequest) {
         var chatInputDTO = ChatInputDTO.from(chatRequest.toDTO());
         var chatResponse = ChatResponse.from(
                 this.chatUseCase.execute(
