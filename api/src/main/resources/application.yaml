@@ -1,6 +1,9 @@
 spring:
   application:
     name: api
+  docker:
+    compose:
+      file: ../infra/compose.yaml
 
 langchain4j:
   ollama:
