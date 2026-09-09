@@ -4,9 +4,7 @@ import com.telai.api.agent.chat.ChatUseCase;
 import com.telai.api.agent.chat.ChatInputDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/chat")
@@ -19,7 +17,8 @@ public class ChatController {
     }
 
     @GetMapping("/")
-    public ResponseEntity<ChatResponse> chat(ChatRequest chatRequest) {
+    public ResponseEntity<ChatResponse> chat(
+            @RequestBody ChatRequest chatRequest) {
         var chatInputDTO = ChatInputDTO.from(chatRequest.toDTO());
         var chatResponse = ChatResponse.from(
                 this.chatUseCase.execute(
