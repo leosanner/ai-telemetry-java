@@ -39,14 +39,9 @@ public class ToolFactory {
             var description = toolParameter.description();
 
             switch (toolParameter.parameterType()) {
-                case STRING:
-                    builder.addStringProperty(name, description);
-
-                case BOOLEAN:
-                    builder.addBooleanProperty(name, description);
-
-                case INTEGER:
-                    builder.addBooleanProperty(name, description);
+                case STRING -> builder.addStringProperty(name, description);
+                case BOOLEAN -> builder.addBooleanProperty(name, description);
+                case INTEGER -> builder.addIntegerProperty(name, description);
             }
         }
 
