@@ -19,7 +19,8 @@ The API lives in `api/`. It currently exposes a chat endpoint powered by a LangC
 `@AiService`, talking to a local Ollama model. Persistence is PostgreSQL (started from
 `infra/compose.yaml`), with Flyway for schema migrations and OpenTelemetry for traces.
 
-The React frontend (`web/`) is planned next.
+The React frontend lives in `web/` (Vite + TypeScript). In development, Vite proxies
+`/chat` to the API so the browser does not need CORS.
 
 ## Layout
 
@@ -27,7 +28,7 @@ The React frontend (`web/`) is planned next.
 api/     Spring Boot API (LangChain4j, JPA, Flyway, OpenTelemetry)
 infra/   Docker Compose (PostgreSQL)
 docs/    Architecture and feature docs
-web/     React frontend (upcoming)
+web/     React + Vite frontend
 ```
 
 See [docs/README.md](docs/README.md) for how documentation is written.
@@ -44,3 +45,17 @@ cd api
 
 Spring Boot Docker Compose support starts PostgreSQL from `infra/compose.yaml`.
 Ollama is expected at `http://localhost:11434` (override with `OLLAMA_BASE_URL`).
+
+## Running the frontend
+
+Requires Node.js 22+ and a running API on port 8080 if you want proxied requests
+to succeed.
+
+```bash
+cd web
+npm install
+npm run dev
+```
+
+The app is served at `http://localhost:5173`. See [web/README.md](web/README.md)
+for env vars and other scripts.
