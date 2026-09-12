@@ -3,7 +3,6 @@ package com.telai.api.agent.shared.domain.tool;
 import dev.langchain4j.agent.tool.ToolSpecification;
 import dev.langchain4j.model.chat.request.json.JsonObjectSchema;
 import dev.langchain4j.service.tool.AiServiceTool;
-import dev.langchain4j.service.tool.ToolExecutor;
 
 import java.util.List;
 
@@ -11,9 +10,10 @@ public class ToolFactory {
 
     public AiServiceTool create(
             ToolConfig config,
-            ToolExecutor executor
+            ToolExecutionStrategy executionStrategy
     ) {
         ToolSpecification toolSpecification = getToolSpecification(config);
+        var executor = ToolExecuterFactory.create(executionStrategy);
 
         return AiServiceTool
                 .builder()
