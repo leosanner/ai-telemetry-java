@@ -17,7 +17,7 @@ public class ChatController {
         this.chatUseCase = chatUseCase;
     }
 
-    @GetMapping("/")
+    @PostMapping({ "", "/" })
     public ResponseEntity<ChatResponse> chat(
             @RequestBody @Valid ChatRequest chatRequest) {
         var chatInputDTO = ChatInputDTO.from(chatRequest.toDTO());
