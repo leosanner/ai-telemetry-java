@@ -14,7 +14,6 @@ public class HttpApiStrategy implements ToolExecutionStrategy {
     private final HttpClient client =  HttpClient.newHttpClient();
 
     public String execute(ToolExecutionRequest request) {
-
         var arguments = HttpRequestToolEntry.fromArguments(request.arguments());
         var clientRequest = buildRequest(arguments);
 
@@ -48,7 +47,7 @@ public class HttpApiStrategy implements ToolExecutionStrategy {
                 )
         );
 
-        arguments.headers().forEach((key, value) -> builder.header(key, value));
+        arguments.headers().forEach(builder::header);
 
         return builder.build();
     }
