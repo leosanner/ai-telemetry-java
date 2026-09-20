@@ -5,6 +5,7 @@ import dev.langchain4j.agent.tool.ToolSpecification;
 import dev.langchain4j.model.chat.request.json.JsonObjectSchema;
 import dev.langchain4j.service.tool.AiServiceTool;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ToolFactory {
@@ -34,10 +35,13 @@ public class ToolFactory {
 
     private JsonObjectSchema createSchema(List<ToolParameters> toolParameters) {
         var builder = JsonObjectSchema.builder();
+        var requiredParameters = new ArrayList<String>();
 
         for (var toolParameter : toolParameters) {
             var name = toolParameter.name();
             var description = toolParameter.description();
+
+            if (toolParameter.required()) {requiredParameters.add(name);}
 
             switch (toolParameter.parameterType()) {
                 case STRING -> builder.addStringProperty(name, description);
@@ -46,6 +50,7 @@ public class ToolFactory {
             }
         }
 
+        builder.required(requiredParameters);
         return builder.build();
     }
 
