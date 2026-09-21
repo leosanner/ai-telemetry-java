@@ -19,8 +19,10 @@ public record ToolConfig(
             throw new InvariantError("description cannot be null");
         }
 
-        if (parameters.isEmpty()) {
-            throw new InvariantError("parameters cannot be empty");
+        if (parameters == null) {
+            throw new InvariantError("parameters cannot be null");
         }
+
+        parameters = List.copyOf(parameters);
     }
 }
