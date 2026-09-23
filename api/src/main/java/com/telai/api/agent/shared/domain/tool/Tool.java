@@ -1,16 +1,18 @@
 package com.telai.api.agent.shared.domain.tool;
 
+import com.telai.api.agent.shared.domain.tool.strategy.ToolExecutionStrategy;
 import com.telai.api.kernel.error.exceptions.InvariantError;
 
 import java.util.List;
 
-public record ToolConfig(
+public record Tool(
         String name,
         String description,
-        List<ToolParameters> parameters
+        List<ToolParameters> parameters,
+        ToolExecutionStrategy strategy
 ) {
 
-    public ToolConfig {
+    public Tool {
         if (name == null) {
             throw new InvariantError("name cannot be null");
         }

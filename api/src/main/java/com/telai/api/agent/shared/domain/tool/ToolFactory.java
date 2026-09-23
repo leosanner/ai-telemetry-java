@@ -10,12 +10,9 @@ import java.util.List;
 
 public class ToolFactory {
 
-    public AiServiceTool create(
-            ToolConfig config,
-            ToolStrategies executionStrategy
-    ) {
-        ToolSpecification toolSpecification = getToolSpecification(config);
-        var executor = ToolExecuterFactory.create(executionStrategy.getExecutionStrategy());
+    public AiServiceTool create(Tool toolConfig) {
+        ToolSpecification toolSpecification = getToolSpecification(toolConfig);
+        var executor = ToolExecuterFactory.create(toolConfig.strategy());
 
         return AiServiceTool
                 .builder()
@@ -24,7 +21,7 @@ public class ToolFactory {
                 .build();
     }
 
-    private ToolSpecification getToolSpecification(ToolConfig config) {
+    private ToolSpecification getToolSpecification(Tool config) {
         return ToolSpecification
                 .builder()
                 .name(config.name())

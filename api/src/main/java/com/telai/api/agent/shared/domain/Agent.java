@@ -1,8 +1,13 @@
 package com.telai.api.agent.shared.domain;
 
+import com.telai.api.agent.shared.domain.tool.Tool;
+
+import java.util.List;
+
 public record Agent(
         String id,
-        Provider provider
+        Model model,
+        List<Tool> tools
 ) {
 
     public Agent {
@@ -10,7 +15,7 @@ public record Agent(
             throw new NullPointerException("id is null");
         }
 
-        if (provider == null) {
+        if (model == null) {
             throw new NullPointerException("provider is null");
         }
     }
