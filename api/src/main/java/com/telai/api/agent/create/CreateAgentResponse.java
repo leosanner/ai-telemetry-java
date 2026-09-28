@@ -1,4 +1,6 @@
 package com.telai.api.agent.create;
 
-public record CreateAgentResponse() {
+import com.telai.api.agent.shared.domain.Agent;
+
+public record CreateAgentResponse(Agent agent) {
 }
