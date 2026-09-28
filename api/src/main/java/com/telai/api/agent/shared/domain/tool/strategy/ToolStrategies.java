@@ -8,21 +8,25 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public enum ToolStrategies {
-    HTTP_REQUEST("HTTP", new HttpApiStrategy());
+    HTTP_REQUEST("http", new HttpApiStrategy());
 
     private final String name;
     private final ToolExecutionStrategy executionStrategy;
 
     private static final Map<String, ToolStrategies> BY_KEY =
-            Arrays.stream(ToolStrategies.values())
-                            .collect(
-                                    Collectors.toUnmodifiableMap(
-                                            ToolStrategies::getName,
-                                            Function.identity()
-                                    )
-                            );
+            Arrays
+                    .stream(ToolStrategies.values())
+                    .collect(Collectors.toUnmodifiableMap(
+                            ToolStrategies::getName,
+                            Function.identity()
+                    ));
 
-    private String getName() {
+    ToolStrategies(String name, ToolExecutionStrategy executionStrategy) {
+        this.name = name;
+        this.executionStrategy = executionStrategy;
+    }
+
+    public String getName() {
         return name;
     }
 
@@ -30,12 +34,7 @@ public enum ToolStrategies {
         return executionStrategy;
     }
 
-    ToolStrategies(String name, ToolExecutionStrategy executionStrategy) {
-        this.name = name;
-        this.executionStrategy = executionStrategy;
-    }
-
-    public static Optional<ToolStrategies> fromKey(String key) {
+    public static Optional<ToolStrategies> getByKey(String key) {
         if (key == null) {
             return Optional.empty();
         }

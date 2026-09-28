@@ -12,12 +12,17 @@ import java.net.http.HttpResponse;
 public class HttpApiStrategy implements ToolExecutionStrategy {
 
     private final HttpClient client =  HttpClient.newHttpClient();
+    private final String name = "HttpApi";
 
     public String execute(ToolExecutionRequest request) {
         var arguments = HttpRequestToolEntry.fromArguments(request.arguments());
         var clientRequest = buildRequest(arguments);
 
         return sendRequest(clientRequest);
+    }
+
+    public String getStrategyName() {
+        return this.name;
     }
 
     private String sendRequest(HttpRequest clientRequest) {

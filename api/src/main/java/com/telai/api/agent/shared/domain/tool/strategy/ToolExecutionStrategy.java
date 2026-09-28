@@ -6,4 +6,5 @@ import java.io.IOException;
 
 public interface ToolExecutionStrategy {
     String execute(ToolExecutionRequest request);
+    String getStrategyName();
 }
